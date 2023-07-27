@@ -3,11 +3,14 @@ import { FeatureModel } from "@luciad/ria/model/feature/FeatureModel.js";
 import { LayerType } from "@luciad/ria/view/LayerType.js";
 import { Map } from "@luciad/ria/view/Map.js";
 import { WFSFeatureStore } from "@luciad/ria/model/store/WFSFeatureStore.js";
+import { Feature } from "@luciad/ria/model/feature/Feature.js";
 import { CityPainter } from "./CityPainter";
 import { addSelection } from "@luciad/ria/view/feature/FeaturePainterUtil.js";
 import { LoadSpatially } from "@luciad/ria/view/feature/loadingstrategy/LoadSpatially.js";
 import { QueryProvider } from "@luciad/ria/view/feature/QueryProvider.js";
 import { gte, literal, property } from "@luciad/ria/ogc/filter/FilterFactory.js";
+import { create } from "@luciad/ria/view/feature/transformation/ClusteringTransformer.js";
+import { Classifier } from "@luciad/ria/view/feature/transformation/Classifier.js";
 
 const BIG_CITY_FILTER = gte(property("TOT_POP"), literal(1000000));
 
@@ -26,6 +29,24 @@ function createCityLoadingStrategy() {
   return new LoadSpatially({ queryProvider: new CityQueryProvider() });
 }
 
+class CityClassifier extends Classifier {
+  getClassification(feature: Feature) {
+    const isBigCity = feature.properties.TOT_POP > 1000000;
+    return isBigCity ? "bigCity" : "city";
+  }
+}
+
+function createCityTransformer() {
+  // Create Clustering transformer
+  return create({
+    classifier: new CityClassifier(),
+    defaultParameters: {
+      clusterSize: 100,
+      minimumPoints: 3,
+    },
+  });
+}
+
 export function createCitiesLayer(map: Map) {
   const url = "https://sampleservices.luciad.com/wfs";
   const featureTypeName = "cities";
@@ -40,7 +61,9 @@ export function createCitiesLayer(map: Map) {
       painter: addSelection(new CityPainter()),
       selectable: true,
       loadingStrategy: createCityLoadingStrategy(),
+      transformer: createCityTransformer(),
     });
+
     // Add a layer to the map
     map.layerTree.addChild(featureLayer);
     return featureLayer;
