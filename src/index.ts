@@ -51,3 +51,20 @@ map.on("SelectionChanged", function (selectionChangeEvent) {
     });
   }
 });
+
+// Add click event listeners to the zoom in and zoom out buttons
+const zoomInButton = document.getElementById("zoom-in")!;
+zoomInButton.addEventListener("click", function () {
+  map.mapNavigator.zoom({
+    factor: 1.25,
+    animate: true,
+  });
+});
+
+const zoomOutButton = document.getElementById("zoom-out")!;
+zoomOutButton.addEventListener("click", function () {
+  map.mapNavigator.zoom({
+    factor: 0.75,
+    animate: true,
+  });
+});

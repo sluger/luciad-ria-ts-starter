@@ -10,11 +10,33 @@
         overflow: hidden;
         border: 1px solid grey;
       }
+      #zoom-in {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        z-index: 1;
+        font-size: 30px;
+        padding: 5px;
+        width: 30px;
+      }
+
+      #zoom-out {
+        position: absolute;
+        top: 75px;
+        right: 10px;
+        z-index: 1;
+        font-size: 30px;
+        padding: 5px;
+        width: 30px;
+      }
     </style>
   </head>
   <body>
     <h1>Hello world</h1>
-    <div id="map" />
+    <div id="map">
+      <button id="zoom-in">+</button>
+      <button id="zoom-out">-</button>
+    </div>
     <script src="main.js"></script>
   </body>
 </html>
