@@ -3,6 +3,8 @@ import { FeatureModel } from "@luciad/ria/model/feature/FeatureModel.js";
 import { LayerType } from "@luciad/ria/view/LayerType.js";
 import { Map } from "@luciad/ria/view/Map.js";
 import { WFSFeatureStore } from "@luciad/ria/model/store/WFSFeatureStore.js";
+import { CityPainter } from "./CityPainter";
+import { addSelection } from "@luciad/ria/view/feature/FeaturePainterUtil.js";
 
 export function createCitiesLayer(map: Map) {
   const url = "https://sampleservices.luciad.com/wfs";
@@ -15,6 +17,7 @@ export function createCitiesLayer(map: Map) {
     const featureLayer = new FeatureLayer(featureModel, {
       label: "US Cities",
       layerType: LayerType.STATIC,
+      painter: addSelection(new CityPainter()),
       selectable: true,
     });
     // Add a layer to the map

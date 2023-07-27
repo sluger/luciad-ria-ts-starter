@@ -1,0 +1,81 @@
+#map {
+  position: relative;
+  width: 100%;
+  height: 620px;
+  overflow: hidden;
+  border: 1px solid grey;
+}
+#zoom-in {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 1;
+  font-size: 30px;
+  padding: 5px;
+  width: 30px;
+}
+
+#zoom-out {
+  position: absolute;
+  top: 75px;
+  right: 10px;
+  z-index: 1;
+  font-size: 30px;
+  padding: 5px;
+  width: 30px;
+}
+
+.blueColorTick {
+  border-top: 1px solid rgb(0, 96, 154);
+}
+.theader {
+  position: relative;
+  width: auto;
+  height: auto;
+  /*border: 1px solid green;*/
+}
+.theader .leftTick {
+  position: relative;
+  float: left;
+  width: 10px;
+}
+.theader .rightTick {
+  position: relative;
+  float: right;
+  width: 10px;
+}
+.blueColorLabel {
+  border-left: 1px solid rgb(0, 96, 154);
+  border-right: 1px solid rgb(0, 96, 154);
+  border-bottom: 1px solid rgb(0, 96, 154);
+  color: rgb(0, 96, 154);
+  background-color: rgba(255, 255, 255, 0.6);
+}
+.theader .name {
+  position: relative;
+  top: -0.6em;
+  text-align: center;
+  padding-left: 12px;
+  padding-right: 12px;
+  font: bold 13px arial, sans-serif;
+  text-shadow: -1px 0 lightgrey, 0 1px lightgrey, 1px 0 lightgrey, 0 -1px lightgrey;
+}
+.Icao {
+  position: relative;
+  top: -0.4em;
+  padding-left: 4px;
+  padding-right: 4px;
+  font: bold 11px arial, sans-serif;
+  text-shadow: -1px 0 lightgrey, 0 1px lightgrey, 1px 0 lightgrey, 0 -1px lightgrey;
+}
+.type {
+  position: relative;
+  top: -0.4em;
+  padding-left: 4px;
+  padding-right: 4px;
+  font: bold 11px arial, sans-serif;
+  text-shadow: -1px 0 lightgrey, 0 1px lightgrey, 1px 0 lightgrey, 0 -1px lightgrey;
+}
+.labelwrapper {
+  padding-top: 10px;
+}
