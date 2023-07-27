@@ -6,7 +6,7 @@ import { RasterTileSetLayer } from "@luciad/ria/view/tileset/RasterTileSetLayer.
 
 import { getReference } from "@luciad/ria/reference/ReferenceProvider.js";
 import { createBounds } from "@luciad/ria/shape/ShapeFactory.js";
-import { createCitiesLayer } from "./vectorData";
+import { createCitiesLayer, createOSMLayer } from "./vectorData";
 
 //Create a new map instance, and display it in the div with the "map" id
 const mapReference = getReference("EPSG:4978");
@@ -39,6 +39,8 @@ createCitiesLayer(map).then(function (citiesLayer) {
     queryFinishedHandle.remove();
   });
 });
+
+createOSMLayer(map);
 
 map.on("SelectionChanged", function (selectionChangeEvent) {
   const selectedCity = selectionChangeEvent.selectionChanges[0].selected[0];

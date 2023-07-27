@@ -69,3 +69,21 @@ export function createCitiesLayer(map: Map) {
     return featureLayer;
   });
 }
+
+export function createOSMLayer(map: Map) {
+  const url = "https://sampleservices.luciad.com/wfs";
+  const featureTypeName = "osm_places";
+
+  return WFSFeatureStore.createFromURL(url, featureTypeName).then((wfsSore) => {
+    const featureModel = new FeatureModel(wfsSore);
+    const featureLayer = new FeatureLayer(featureModel, {
+      label: "OSM Places",
+      layerType: LayerType.STATIC,
+      selectable: true,
+      // Here we set the minScale so that the layer will only be rendered when the map scale is less than 1/350000
+      minScale: 1 / 350000,
+    });
+    map.layerTree.addChild(featureLayer);
+    return featureLayer;
+  });
+}
